@@ -21,6 +21,7 @@ jobs:
 
       - name: Build and push container image to dockerhub
         run: |
+          docker compose up --build
           docker tag singlestage:latest ${{ secrets.DOCKER_USERNAME }}/singlestage:latest
           docker tag multistage:latest ${{ secrets.DOCKER_USERNAME }}/multistage:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/singlestage:latest 
