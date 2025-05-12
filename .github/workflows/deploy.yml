@@ -20,13 +20,9 @@ jobs:
         uses: docker/setup-buildx-action@7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b
 
       - name: Log in to Dockerhub
-        uses: docker/login-action@8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d
-        with:
-          username: ${{ DOCKER_USERNAME }}
-          password: ${{ DOCKER_PASSWORD }}
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
 
       - name: Build and push container image to dockerhub
-        uses: docker/build-push-action@9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f
         run: |
           docker tag singlestage:latest ${{ secrets.DOCKER_USERNAME }}/singlestage:latest
           docker tag multistage:latest ${{ secrets.DOCKER_USERNAME }}/multistage:latest
