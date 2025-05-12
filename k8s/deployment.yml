@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: singledeploy
+  labels:
+    app: singledeploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: singledeploy
+  template:
+    metadata:
+      labels:
+        app: singledeploy
+    spec:
+      containers:
+      - name: singledeploy
+        image: sunaina0510/singlestage:latest
+        ports:
+        - containerPort: 3000
